@@ -98,15 +98,15 @@ def test_invalid_ip_addresses(inet_pton, family, address):
 
 @pytest.mark.parametrize(["family", "packed"], INVALID_PACKED_ADDRESSES)
 def test_invalid_packed_addresses(inet_ntop, family, packed):
-    with pytest.raises(ValueError):
+    with pytest.raises(socket.error):
         inet_ntop(family, packed)
 
 
 @pytest.mark.parametrize(["family", "address", "packed"], VALID_IP_ADDRESSES)
 def test_unknown_family(inet_pton, inet_ntop, family, address, packed):
-    with pytest.raises(ValueError):
+    with pytest.raises(socket.error):
         inet_ntop(1000, packed)
-    with pytest.raises(OSError):
+    with pytest.raises(socket.error):
         inet_pton(1000, address)
 
 
